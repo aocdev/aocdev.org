@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRuntime-Inspector &mdash; aocdev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top navigation bar -->
+<div class="topnav">
+    <a href="index.html">&laquo; All Projects</a>
+    <span class="topnav-sep">|</span>
+    <a href="#overview">Overview</a>
+    <span class="topnav-sep">|</span>
+    <a href="#api">API</a>
+    <span class="topnav-sep">|</span>
+    <a href="#configuration">Configuration</a>
+    <span class="topnav-sep">|</span>
+    <a href="#extending">Extending</a>
+    <span class="topnav-sep">|</span>
+    <a href="#installation">Installation</a>
+    <span class="topnav-sep">|</span>
+    <a href="https://github.com/aocdev/jruntime-inspector" target="_blank">GitHub</a>
+</div>
+
+<!-- Page header -->
+<div class="page-header">
+    <h1>JRuntime-Inspector</h1>
+    <div class="subtitle">Lightweight, framework-agnostic runtime profiling library for JVM applications</div>
+</div>
+
+<div class="content">
+
+    <!-- ═══════════════════════════════════════════
+         OVERVIEW
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="overview">Overview</div>
+    <div class="about-box">
+        <div class="project-meta" style="margin-bottom: 12px;">
+            <span class="meta-badge lang">Java 21+</span>
+            <span class="meta-badge license">Apache&nbsp;2.0</span>
+            <span class="meta-badge">Zero&nbsp;Dependencies</span>
+            <span class="meta-badge">Maven&nbsp;3.8+</span>
+            <span class="meta-badge">Maven&nbsp;Central</span>
+        </div>
+        <p>
+            JRuntime-Inspector is a lightweight, framework-agnostic runtime profiling library for JVM applications.
+            Instrument your code with <code>Metrics.start()</code> / <code>Metrics.end()</code>,
+            <code>Metrics.track()</code>, or <code>Metrics.measure()</code> and get a hierarchical
+            Markdown report that pinpoints exactly where your execution time goes &mdash; database,
+            parser, mapper, or anything else.
+        </p>
+        <p>
+            JDK only. No Spring, Micronaut, or Quarkus required. Each thread has its own independent
+            context via <code>ThreadLocal</code>, making it safe for concurrent use out of the box.
+        </p>
+        <div class="links">
+            <a href="https://github.com/aocdev/jruntime-inspector" target="_blank">github.com/aocdev/jruntime-inspector</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         KEY FEATURES
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="features">Key Features</div>
+    <table class="feature-list" style="border: 1px solid #888888;">
+        <tr>
+            <td>Zero dependencies</td>
+            <td>JDK only &mdash; no Spring, Micronaut, Quarkus, or any third-party library required.</td>
+        </tr>
+        <tr>
+            <td>Framework-agnostic</td>
+            <td>Works with any JVM backend: plain Java, Spring Boot, Quarkus, Micronaut, Jakarta EE, etc.</td>
+        </tr>
+        <tr>
+            <td>Three instrumentation styles</td>
+            <td>Manual <code>start/end</code>, try-with-resources <code>track()</code>, and functional <code>measure()</code> &mdash; pick what fits the call site.</td>
+        </tr>
+        <tr>
+            <td>Hierarchical execution tree</td>
+            <td>Nested calls produce an indented breakdown with percentage contribution per node.</td>
+        </tr>
+        <tr>
+            <td>Hotspot detection</td>
+            <td>Automatically flags nodes that exceed a configurable percentage of total run time.</td>
+        </tr>
+        <tr>
+            <td>Threshold filtering</td>
+            <td>Ignore fast nodes below a configurable duration floor (ms) to keep reports clean.</td>
+        </tr>
+        <tr>
+            <td>Tag support</td>
+            <td>Attach arbitrary key-value metadata to any node (e.g. <code>table=users</code>, <code>operation=SELECT</code>).</td>
+        </tr>
+        <tr>
+            <td>Thread-safe</td>
+            <td>Each thread owns its own independent context via <code>ThreadLocal</code>. No locking required.</td>
+        </tr>
+        <tr>
+            <td>Extensible</td>
+            <td>Implement <code>MetricsReporter</code> to produce JSON, HTML, or any custom output format.</td>
+        </tr>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         API REFERENCE
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="api">Instrumentation API</div>
+
+    <!-- Lifecycle -->
+    <div class="feature-bar">Lifecycle</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Metrics.init(MetricsConfig)</td>
+                <td class="desc">Replace the global config. Call once at application startup.</td>
+            </tr>
+            <tr>
+                <td>Metrics.startRun(String name)</td>
+                <td class="desc">Begin a named measurement run on the current thread.</td>
+            </tr>
+            <tr>
+                <td>Metrics.endRun()</td>
+                <td class="desc">End the current run and finalise the root node.</td>
+            </tr>
+            <tr>
+                <td>Metrics.report()</td>
+                <td class="desc">Return a <code>MetricReport</code> for the current thread. Call after <code>endRun()</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Measurement -->
+    <div class="feature-bar" style="margin-top: 14px;">Measurement</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Style</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Metrics.start(String name)</td>
+                <td class="desc">Manual</td>
+                <td class="desc">Begin a named block. Must be paired with <code>end()</code>.</td>
+            </tr>
+            <tr>
+                <td>Metrics.start(String name, Map&lt;String,String&gt; tags)</td>
+                <td class="desc">Manual</td>
+                <td class="desc">Same, with metadata tags.</td>
+            </tr>
+            <tr>
+                <td>Metrics.end()</td>
+                <td class="desc">Manual</td>
+                <td class="desc">End the most recently started block.</td>
+            </tr>
+            <tr>
+                <td>Metrics.track(String name)</td>
+                <td class="desc">try-with-resources</td>
+                <td class="desc">Returns <code>MetricScope</code> (AutoCloseable). Calls <code>end()</code> on close.</td>
+            </tr>
+            <tr>
+                <td>Metrics.track(String name, Map&lt;String,String&gt; tags)</td>
+                <td class="desc">try-with-resources</td>
+                <td class="desc">Same, with tags.</td>
+            </tr>
+            <tr>
+                <td>Metrics.measure(String name, Runnable)</td>
+                <td class="desc">Functional</td>
+                <td class="desc">Wraps a <code>Runnable</code> and measures its execution.</td>
+            </tr>
+            <tr>
+                <td>Metrics.measure(String name, Map&lt;String,String&gt; tags, Runnable)</td>
+                <td class="desc">Functional</td>
+                <td class="desc">Same, with tags.</td>
+            </tr>
+            <tr>
+                <td>Metrics.measure(String name, Supplier&lt;T&gt;)</td>
+                <td class="desc">Functional</td>
+                <td class="desc">Wraps a <code>Supplier&lt;T&gt;</code> and returns the value.</td>
+            </tr>
+            <tr>
+                <td>Metrics.measure(String name, Map&lt;String,String&gt; tags, Supplier&lt;T&gt;)</td>
+                <td class="desc">Functional</td>
+                <td class="desc">Same, with tags.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- MetricReport -->
+    <div class="feature-bar" style="margin-top: 14px;">MetricReport</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>report.toMarkdown()</td>
+                <td class="desc">Renders the full execution report as a Markdown string.</td>
+            </tr>
+            <tr>
+                <td>report.writeToFile(String path)</td>
+                <td class="desc">Writes the report to a file (UTF-8). Parent directories are created automatically.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         QUICK START EXAMPLE
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar">Quick Start Example</div>
+    <div class="about-box">
+        <p>Instrument your code:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">Metrics.startRun("import-job");
+
+try (MetricScope ignored = Metrics.track("processUsers")) {
+    Metrics.measure("dbQuery", Map.of("table", "users"), () -&gt; fetchFromDatabase());
+    Metrics.measure("parse",   () -&gt; parseResponse());
+    Metrics.measure("mapper",  () -&gt; mapToDomain());
+}
+
+Metrics.endRun();
+Metrics.report().writeToFile("report.md");</pre>
+        <p style="margin-top: 12px;">Generated <code>report.md</code>:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;"># Execution Report — import-job
+
+## Summary
+- **Total time:** 218 ms
+
+## Breakdown
+- **processUsers** (193 ms) → 88.4%
+  - **dbQuery** (120 ms) → 55.0% `table=users`
+  - **parse** (40 ms) → 18.4%
+  - **mapper** (31 ms) → 14.3%
+
+## Hotspots
+- **processUsers** — 193 ms (88.4% of total) ⚠
+- **dbQuery** — 120 ms (55.0% of total) ⚠</pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         CONFIGURATION
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="configuration">Configuration</div>
+    <div class="about-box" style="padding-bottom: 0;">
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-bottom:14px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">MetricsConfig config = MetricsConfig.builder()
+        .enabled(true)                   // false = all methods become no-ops
+        .thresholdMs(10)                 // skip nodes faster than 10 ms
+        .includeThreadName(true)         // include thread name in Summary
+        .hotspotThresholdPercent(50.0)   // flag nodes that exceed 50% of total time
+        .build();</pre>
+    </div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Option</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>enabled</td>
+                <td class="desc">boolean</td>
+                <td class="desc">true</td>
+                <td class="desc">Master switch. <code>false</code> makes all calls no-ops with zero overhead.</td>
+            </tr>
+            <tr>
+                <td>thresholdMs</td>
+                <td class="desc">long</td>
+                <td class="desc">0</td>
+                <td class="desc">Minimum duration (ms) to include a node in the report. <code>0</code> = show everything.</td>
+            </tr>
+            <tr>
+                <td>includeThreadName</td>
+                <td class="desc">boolean</td>
+                <td class="desc">false</td>
+                <td class="desc">Prints the thread name in the Summary section of the report.</td>
+            </tr>
+            <tr>
+                <td>hotspotThresholdPercent</td>
+                <td class="desc">double</td>
+                <td class="desc">50.0</td>
+                <td class="desc">Percentage of total run time above which a node is flagged as a hotspot.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         EXTENDING
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="extending">Extending the Reporter</div>
+    <div class="about-box">
+        <p>
+            Implement <code>MetricsReporter</code> to produce any output format (JSON, HTML, CSV, &hellip;):
+        </p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">public class JsonReporter implements MetricsReporter {
+
+    @Override
+    public String generate(MetricNode root, MetricsConfig config) {
+        // traverse root.getChildren() recursively and build JSON
+    }
+}</pre>
+        <p style="margin-top: 10px;">
+            Pass your reporter to <code>MetricReport</code> directly, or contribute it back via a pull request.
+        </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         INSTALLATION
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="installation">Installation</div>
+    <div class="about-box">
+        <p>Add <code>metrics-core</code> to your <code>pom.xml</code>:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">&lt;dependency&gt;
+    &lt;groupId&gt;org.aocdev&lt;/groupId&gt;
+    &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+        <p style="margin-top: 12px;">Build and run the demo:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:8px 14px; margin-top:8px; font-family:'Courier New',Courier,monospace; font-size:12px;">./mvnw install &amp;&amp; ./mvnw -pl metrics-example exec:java</pre>
+        <p style="margin-top: 10px;">The demo generates <code>report.md</code> in the working directory.</p>
+    </div>
+
+    <hr class="javadoc">
+
+    <div style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; font-size: 12px; color: #555555;">
+        <strong>Repository:</strong>
+        <a href="https://github.com/aocdev/jruntime-inspector" target="_blank">github.com/aocdev/jruntime-inspector</a>
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <strong>Requirements:</strong> Java 21+, Maven 3.8+
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <strong>License:</strong> Apache License 2.0
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <a href="index.html">&laquo; Back to all projects</a>
+    </div>
+
+</div>
+<!-- end content -->
+
+<!-- Footer -->
+<div class="page-footer">
+    &copy; 2026 aocdev (Albert Ortells) &mdash; All projects released under their respective open source licenses.
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="https://github.com/aocdev" target="_blank">github.com/aocdev</a>
+</div>
+
+</body>
+</html>

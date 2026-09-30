@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JDocusaurus &mdash; aocdev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top navigation bar -->
+<div class="topnav">
+    <a href="index.html">&laquo; All Projects</a>
+    <span class="topnav-sep">|</span>
+    <a href="#overview">Overview</a>
+    <span class="topnav-sep">|</span>
+    <a href="#features">Features</a>
+    <span class="topnav-sep">|</span>
+    <a href="#annotations">Annotations</a>
+    <span class="topnav-sep">|</span>
+    <a href="#installation">Installation</a>
+    <span class="topnav-sep">|</span>
+    <a href="#options">Processor Options</a>
+    <span class="topnav-sep">|</span>
+    <a href="#output">Generated Output</a>
+    <span class="topnav-sep">|</span>
+    <a href="https://github.com/aocdev/JDocusaurus" target="_blank">GitHub</a>
+</div>
+
+<!-- Page header -->
+<div class="page-header">
+    <h1>JDocusaurus</h1>
+    <div class="subtitle">Java annotation processor for generating Docusaurus microservice documentation</div>
+</div>
+
+<div class="content">
+
+    <!-- ═══════════════════════════════════════════
+         OVERVIEW
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="overview">Overview</div>
+    <div class="about-box">
+        <div class="project-meta" style="margin-bottom: 12px;">
+            <span class="meta-badge lang">Java 21+</span>
+            <span class="meta-badge license">Apache&nbsp;2.0</span>
+            <span class="meta-badge">Annotation&nbsp;Processor&nbsp;(APT)</span>
+            <span class="meta-badge">Maven&nbsp;3.8+</span>
+            <span class="meta-badge">Docusaurus</span>
+        </div>
+        <p>
+            JDocusaurus is a Java library for generating deep microservice documentation in
+            <a href="https://docusaurus.io/" target="_blank">Docusaurus</a> format, using annotations
+            and compile-time processing (APT). Annotate your code with <code>@JDoc*</code> and
+            automatically get: Markdown pages with endpoints, Mermaid sequence diagrams, ER diagrams,
+            event maps, business rules, external integrations, configuration tables, and a
+            ready-to-publish Docusaurus structure &mdash; with <strong>zero runtime overhead</strong>.
+        </p>
+        <p>
+            Processing happens exclusively at compile time (<code>RetentionPolicy.SOURCE</code>).
+            No reflection, no agents, no Spring or framework dependency required.
+        </p>
+        <div class="links">
+            <a href="https://github.com/aocdev/JDocusaurus" target="_blank">github.com/aocdev/JDocusaurus</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         KEY FEATURES
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="features">Key Features</div>
+    <table class="feature-list" style="border: 1px solid #888888;">
+        <tr>
+            <td>Zero runtime</td>
+            <td>Annotation processing happens only at compile time (<code>RetentionPolicy.SOURCE</code>). No agents, no reflection, no framework dependency.</td>
+        </tr>
+        <tr>
+            <td>Mermaid diagrams</td>
+            <td>Automatic generation of sequence diagrams, ER diagrams, event maps, and dependency graphs using Mermaid syntax.</td>
+        </tr>
+        <tr>
+            <td>Auto-flow detection</td>
+            <td>JavaParser statically analyses source code to detect method call chains on injected fields and generates sequence diagrams automatically, recursively, with conditional branch detection.</td>
+        </tr>
+        <tr>
+            <td>Hybrid JPA support</td>
+            <td>Enriches entity documentation with JPA metadata (<code>@Entity</code>, <code>@Column</code>, <code>@Id</code>, <code>@OneToMany</code>&hellip;) without requiring JPA as a compile dependency. <code>@JDoc*</code> annotations always take priority.</td>
+        </tr>
+        <tr>
+            <td>Full Docusaurus output</td>
+            <td>Generates <code>index.md</code>, <code>sidebars.js</code>, and per-controller / per-entity / per-event Markdown files ready to drop into a Docusaurus project.</td>
+        </tr>
+        <tr>
+            <td>Business rules</td>
+            <td>Documents business rules grouped by severity: <code>MANDATORY</code>, <code>WARNING</code>, <code>INFO</code>.</td>
+        </tr>
+        <tr>
+            <td>External integrations</td>
+            <td>Documents external services (REST, gRPC, messaging&hellip;) and generates a Mermaid dependency map.</td>
+        </tr>
+        <tr>
+            <td>Configuration docs</td>
+            <td>Documents configuration properties. Secrets (<code>secret = true</code>) are masked with <code>***</code> in the output.</td>
+        </tr>
+        <tr>
+            <td>Configurable</td>
+            <td>Output directory, project name, description, auto-flow depth and more via Maven compiler args (<code>-Ajdoc.*</code>).</td>
+        </tr>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         ANNOTATIONS
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="annotations">Annotation Reference</div>
+
+    <!-- REST API -->
+    <div class="feature-bar">REST API</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Annotation</th>
+                <th>Target</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@JDocClass</td>
+                <td class="desc">TYPE</td>
+                <td class="desc">Documents an API controller / class. Accepts <code>name</code>, <code>description</code>, <code>basePath</code>, <code>version</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocEndpoint</td>
+                <td class="desc">METHOD</td>
+                <td class="desc">Documents an HTTP endpoint. Accepts <code>method</code>, <code>path</code>, <code>description</code>, <code>summary</code>, <code>auth</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocParam</td>
+                <td class="desc">PARAMETER</td>
+                <td class="desc">Documents an endpoint parameter. Accepts <code>name</code>, <code>description</code>, <code>location</code> (PATH / QUERY / HEADER / BODY), <code>example</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocResponse</td>
+                <td class="desc">METHOD</td>
+                <td class="desc">Documents an HTTP response. Accepts <code>code</code>, <code>description</code>. Repeatable.</td>
+            </tr>
+            <tr>
+                <td>@JDocHeader</td>
+                <td class="desc">METHOD</td>
+                <td class="desc">Documents an HTTP request header. Accepts <code>name</code>, <code>description</code>. Repeatable.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Flows -->
+    <div class="feature-bar" style="margin-top: 14px;">Flows &amp; Sequence Diagrams</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Annotation</th>
+                <th>Target</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@JDocFlow</td>
+                <td class="desc">TYPE, METHOD</td>
+                <td class="desc">Declares a named business flow with title and description.</td>
+            </tr>
+            <tr>
+                <td>@JDocFlowStep</td>
+                <td class="desc">METHOD</td>
+                <td class="desc">Defines a step within a flow. Accepts <code>flow</code>, <code>order</code>, <code>from</code>, <code>to</code>, <code>message</code>, <code>returnMessage</code>. Repeatable.</td>
+            </tr>
+            <tr>
+                <td>@JDocParticipant</td>
+                <td class="desc">TYPE</td>
+                <td class="desc">Declares a named participant for sequence diagrams.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Data model -->
+    <div class="feature-bar" style="margin-top: 14px;">Data Model</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Annotation</th>
+                <th>Target</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@JDocEntity</td>
+                <td class="desc">TYPE</td>
+                <td class="desc">Documents a data entity. Accepts <code>name</code>, <code>description</code>, <code>table</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocField</td>
+                <td class="desc">FIELD</td>
+                <td class="desc">Documents an entity field. Accepts <code>description</code>, <code>nullable</code>, <code>constraints</code>, <code>example</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocRelation</td>
+                <td class="desc">FIELD</td>
+                <td class="desc">Documents a relationship between entities. Accepts <code>target</code>, <code>type</code> (ONE_TO_ONE / ONE_TO_MANY / MANY_TO_ONE / MANY_TO_MANY), <code>description</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Events -->
+    <div class="feature-bar" style="margin-top: 14px;">Events &amp; Messaging</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Annotation</th>
+                <th>Target</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@JDocEvent</td>
+                <td class="desc">TYPE</td>
+                <td class="desc">Declares a domain event. Accepts <code>name</code>, <code>description</code>, <code>topic</code>, <code>schema</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocProduces</td>
+                <td class="desc">METHOD, TYPE</td>
+                <td class="desc">Marks an event producer. Accepts <code>event</code>, <code>topic</code>, <code>description</code>. Repeatable.</td>
+            </tr>
+            <tr>
+                <td>@JDocConsumes</td>
+                <td class="desc">METHOD, TYPE</td>
+                <td class="desc">Marks an event consumer. Accepts <code>event</code>, <code>description</code>, <code>group</code>. Repeatable.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Rules / Integrations / Config -->
+    <div class="feature-bar" style="margin-top: 14px;">Business Rules, Integrations &amp; Configuration</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Annotation</th>
+                <th>Target</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@JDocBusinessRule</td>
+                <td class="desc">METHOD, TYPE</td>
+                <td class="desc">Documents a business rule. Accepts <code>id</code>, <code>rule</code>, <code>severity</code> (MANDATORY / WARNING / INFO), <code>relatedRules</code>. Repeatable.</td>
+            </tr>
+            <tr>
+                <td>@JDocExternalService</td>
+                <td class="desc">TYPE, FIELD</td>
+                <td class="desc">Documents an external service dependency. Accepts <code>name</code>, <code>description</code>, <code>type</code> (REST / GRPC / MESSAGING / DATABASE / &hellip;), <code>url</code>, <code>owner</code>.</td>
+            </tr>
+            <tr>
+                <td>@JDocConfig</td>
+                <td class="desc">FIELD, TYPE</td>
+                <td class="desc">Documents a configuration property. Accepts <code>key</code>, <code>description</code>, <code>required</code>, <code>defaultValue</code>, <code>example</code>, <code>secret</code>. Repeatable.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         INSTALLATION
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="installation">Installation</div>
+    <div class="about-box">
+        <p>Add the dependencies to your <code>pom.xml</code>:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.aocdev&lt;/groupId&gt;
+        &lt;artifactId&gt;jdocusaurus-annotations&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.aocdev&lt;/groupId&gt;
+        &lt;artifactId&gt;jdocusaurus-processor&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
+        <p style="margin-top:12px;">Optionally configure processor options via <code>maven-compiler-plugin</code>:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; overflow-x:auto;">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.13.0&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;compilerArgs&gt;
+                    &lt;arg&gt;-Ajdoc.projectName=User Service&lt;/arg&gt;
+                    &lt;arg&gt;-Ajdoc.projectDescription=User management microservice&lt;/arg&gt;
+                    &lt;arg&gt;-Ajdoc.fullStructure=true&lt;/arg&gt;
+                &lt;/compilerArgs&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</pre>
+        <p style="margin-top:12px;">Then compile and documentation is generated automatically:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:8px 14px; margin-top:8px; font-family:'Courier New',Courier,monospace; font-size:12px;">./mvnw clean compile</pre>
+        <p style="margin-top:10px;">Markdown files are generated in <code>target/classes/docs/</code> by default.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PROCESSOR OPTIONS
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="options">Processor Options</div>
+    <table class="annot-table">
+        <thead>
+            <tr>
+                <th>Option (<code>-Ajdoc.*</code>)</th>
+                <th>Description</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>jdoc.outputDir</td>
+                <td class="desc">Output directory. Relative paths write via Filer to <code>target/classes/docs/</code>; absolute paths write directly with <code>java.nio.file.Files</code>.</td>
+                <td class="desc"><code>docs</code></td>
+            </tr>
+            <tr>
+                <td>jdoc.fullStructure</td>
+                <td class="desc">Generates <code>sidebars.js</code> for Docusaurus alongside the Markdown files.</td>
+                <td class="desc"><code>false</code></td>
+            </tr>
+            <tr>
+                <td>jdoc.projectName</td>
+                <td class="desc">Project name used as the main page title.</td>
+                <td class="desc">(first controller name)</td>
+            </tr>
+            <tr>
+                <td>jdoc.projectDescription</td>
+                <td class="desc">Project description shown on the main page.</td>
+                <td class="desc">(empty)</td>
+            </tr>
+            <tr>
+                <td>jdoc.autoFlowDepth</td>
+                <td class="desc">Maximum recursion depth for JavaParser automatic flow detection.</td>
+                <td class="desc"><code>5</code></td>
+            </tr>
+            <tr>
+                <td>jdoc.autoFlowEnabled</td>
+                <td class="desc">Enables or disables automatic flow detection via JavaParser.</td>
+                <td class="desc"><code>true</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════════
+         GENERATED OUTPUT STRUCTURE
+    ═══════════════════════════════════════════ -->
+    <div class="section-bar" id="output">Generated Output Structure</div>
+    <div class="about-box">
+        <p>With <code>jdoc.fullStructure=true</code>, the following directory tree is generated:</p>
+        <pre style="background:#f7f7f7; border:1px solid #cccccc; padding:10px 14px; margin-top:10px; font-family:'Courier New',Courier,monospace; font-size:12px; line-height:1.7;">docs/
+  index.md                    <span style="color:#555555;"># Main page with summary diagrams</span>
+  sidebars.js                 <span style="color:#555555;"># Docusaurus sidebar configuration</span>
+  api/
+    index.md                  <span style="color:#555555;"># Controller and endpoint index</span>
+    user-controller.md        <span style="color:#555555;"># Per-controller documentation</span>
+  flows/
+    index.md                  <span style="color:#555555;"># Flow index</span>
+    user-registration.md      <span style="color:#555555;"># Per-flow sequence diagram</span>
+  data-model/
+    index.md                  <span style="color:#555555;"># Global ER diagram + entity table</span>
+    user-entity.md            <span style="color:#555555;"># Per-entity fields and relationships</span>
+  events/
+    index.md                  <span style="color:#555555;"># Event map + summary table</span>
+    user-created-event.md     <span style="color:#555555;"># Per-event producers/consumers</span>
+  business-rules/
+    index.md                  <span style="color:#555555;"># Rules grouped by severity</span>
+  integrations/
+    index.md                  <span style="color:#555555;"># Dependency map + service table</span>
+  config/
+    index.md                  <span style="color:#555555;"># Configuration properties table</span></pre>
+        <p style="margin-top: 12px;">
+            To integrate with Docusaurus, install the Mermaid plugin (<code>npm install @docusaurus/theme-mermaid</code>)
+            and enable it in <code>docusaurus.config.js</code>.
+            See the <a href="https://github.com/aocdev/JDocusaurus" target="_blank">README</a> for full instructions.
+        </p>
+    </div>
+
+    <hr class="javadoc">
+
+    <div style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; font-size: 12px; color: #555555;">
+        <strong>Repository:</strong>
+        <a href="https://github.com/aocdev/JDocusaurus" target="_blank">github.com/aocdev/JDocusaurus</a>
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <strong>Requirements:</strong> Java 21+, Maven 3.8+
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <strong>License:</strong> Apache License 2.0
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <a href="index.html">&laquo; Back to all projects</a>
+    </div>
+
+</div>
+<!-- end content -->
+
+<!-- Footer -->
+<div class="page-footer">
+    &copy; 2026 aocdev (Albert Ortells) &mdash; All projects released under their respective open source licenses.
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="https://github.com/aocdev" target="_blank">github.com/aocdev</a>
+</div>
+
+</body>
+</html>

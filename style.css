@@ -1,0 +1,370 @@
+/* ============================================================
+   aocdev — Open Source Projects
+   Old-fashioned Javadoc style (circa Java 1.4–1.6)
+   ============================================================ */
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base */
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+a:hover {
+    color: #0000cc;
+}
+
+/* ── Top nav bar ── */
+.topnav {
+    background-color: #4d7a97;
+    padding: 4px 12px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    border-bottom: 1px solid #2c4f6a;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topnav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.topnav a:hover {
+    text-decoration: underline;
+    color: #e0e0e0;
+}
+
+.topnav-sep {
+    color: #aac8d8;
+    font-size: 11px;
+}
+
+/* ── Page header ── */
+.page-header {
+    background-color: #4d7a97;
+    padding: 10px 20px 6px 20px;
+    border-bottom: 2px solid #2c4f6a;
+}
+
+.page-header h1 {
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.page-header .subtitle {
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #c5dae6;
+    margin-top: 2px;
+}
+
+/* ── Content wrapper ── */
+.content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    width: 100%;
+    flex: 1 0 auto;
+}
+
+/* ── Section title bar (the dark navy bar) ── */
+.section-bar {
+    background-color: #4d7a97;
+    color: #ffffff;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    margin-top: 24px;
+    margin-bottom: 0;
+    border: 1px solid #2c4f6a;
+}
+
+/* ── About / Presentation section ── */
+.about-box {
+    border: 1px solid #888888;
+    border-top: none;
+    padding: 16px 20px;
+    background-color: #ffffff;
+}
+
+.about-box p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.about-box p:last-child {
+    margin-bottom: 0;
+}
+
+.about-box .author-name {
+    font-weight: bold;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.about-box .handle {
+    color: #4d7a97;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+}
+
+.about-box .links {
+    margin-top: 10px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.about-box .links a {
+    margin-right: 14px;
+}
+
+/* ── Projects section ── */
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #888888;
+    border-top: none;
+}
+
+.projects-table th {
+    background-color: #dee3e9;
+    color: #000000;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 10px;
+    border: 1px solid #888888;
+}
+
+.projects-table td {
+    padding: 10px 12px;
+    vertical-align: top;
+    border: 1px solid #cccccc;
+    font-size: 13px;
+}
+
+.projects-table tr:nth-child(even) td {
+    background-color: #f7f7f7;
+}
+
+.projects-table tr:nth-child(odd) td {
+    background-color: #ffffff;
+}
+
+/* ── Project card (inside a single merged cell row) ── */
+.project-card {
+    padding: 14px 18px;
+    background-color: #ffffff;
+    border: 1px solid #888888;
+    border-top: none;
+    margin-bottom: 0;
+}
+
+.project-card + .project-card {
+    border-top: 1px solid #bbbbbb;
+}
+
+.project-name {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.project-name a {
+    color: #000080;
+    text-decoration: none;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.project-name a:hover {
+    text-decoration: underline;
+}
+
+.project-meta {
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #555555;
+    margin: 4px 0 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.meta-badge {
+    display: inline-block;
+    padding: 1px 7px;
+    background-color: #dee3e9;
+    border: 1px solid #888888;
+    font-size: 11px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+.meta-badge.lang {
+    background-color: #f5e6a3;
+    border-color: #c9a800;
+}
+
+.meta-badge.license {
+    background-color: #d5e8d4;
+    border-color: #5a9b5a;
+}
+
+.project-description {
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-family: "Times New Roman", Times, serif;
+    color: #000000;
+}
+
+/* ── Feature table inside a card ── */
+.feature-bar {
+    background-color: #dee3e9;
+    color: #000000;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border: 1px solid #888888;
+    border-bottom: none;
+    margin-top: 12px;
+    display: inline-block;
+    width: 100%;
+}
+
+.feature-list {
+    border: 1px solid #888888;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.feature-list td {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-bottom: 1px solid #cccccc;
+    vertical-align: top;
+}
+
+.feature-list td:first-child {
+    color: #555555;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    width: 1%;
+    padding-right: 14px;
+    border-right: 1px solid #cccccc;
+    background-color: #f7f7f7;
+}
+
+.feature-list tr:last-child td {
+    border-bottom: none;
+}
+
+/* ── Annotation summary table ── */
+.annot-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #888888;
+    margin-top: 0;
+}
+
+.annot-table th {
+    background-color: #dee3e9;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 8px;
+    text-align: left;
+    border: 1px solid #888888;
+}
+
+.annot-table td {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    padding: 4px 8px;
+    border: 1px solid #cccccc;
+    vertical-align: top;
+    color: #000080;
+}
+
+.annot-table td.desc {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+    color: #000000;
+}
+
+.annot-table tr:nth-child(even) td {
+    background-color: #f7f7f7;
+}
+
+/* ── Footer ── */
+.page-footer {
+    background-color: #4d7a97;
+    color: #c5dae6;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    padding: 8px 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 2px solid #2c4f6a;
+}
+
+.page-footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.page-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ── Horizontal rule ── */
+hr.javadoc {
+    border: none;
+    border-top: 1px solid #888888;
+    margin: 20px 0;
+}
+
+/* ── Inline code ── */
+code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    color: #000080;
+    background-color: #f0f0f0;
+    padding: 0 3px;
+}
