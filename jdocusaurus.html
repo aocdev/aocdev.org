@@ -73,74 +73,76 @@
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="features">Key Features</div>
             <table class="feature-list" style="border: 1px solid #888888">
-                <tr>
-                    <td>Zero runtime</td>
-                    <td>
-                        Annotation processing happens only at compile time
-                        (<code>RetentionPolicy.SOURCE</code>). No agents, no reflection, no
-                        framework dependency.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mermaid diagrams</td>
-                    <td>
-                        Automatic generation of sequence diagrams, ER diagrams, event maps, and
-                        dependency graphs using Mermaid syntax.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Auto-flow detection</td>
-                    <td>
-                        JavaParser statically analyses source code to detect method call chains on
-                        injected fields and generates sequence diagrams automatically, recursively,
-                        with conditional branch detection.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hybrid JPA support</td>
-                    <td>
-                        Enriches entity documentation with JPA metadata (<code>@Entity</code>,
-                        <code>@Column</code>, <code>@Id</code>, <code>@OneToMany</code>&hellip;)
-                        without requiring JPA as a compile dependency.
-                        <code>@JDoc*</code> annotations always take priority.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Full Docusaurus output</td>
-                    <td>
-                        Generates <code>index.md</code>, <code>sidebars.js</code>, and
-                        per-controller / per-entity / per-event Markdown files ready to drop into a
-                        Docusaurus project.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Business rules</td>
-                    <td>
-                        Documents business rules grouped by severity: <code>MANDATORY</code>,
-                        <code>WARNING</code>, <code>INFO</code>.
-                    </td>
-                </tr>
-                <tr>
-                    <td>External integrations</td>
-                    <td>
-                        Documents external services (REST, gRPC, messaging&hellip;) and generates a
-                        Mermaid dependency map.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Configuration docs</td>
-                    <td>
-                        Documents configuration properties. Secrets (<code>secret = true</code>) are
-                        masked with <code>***</code> in the output.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Configurable</td>
-                    <td>
-                        Output directory, project name, description, auto-flow depth and more via
-                        Maven compiler args (<code>-Ajdoc.*</code>).
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Zero runtime</td>
+                        <td>
+                            Annotation processing happens only at compile time
+                            (<code>RetentionPolicy.SOURCE</code>). No agents, no reflection, no
+                            framework dependency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mermaid diagrams</td>
+                        <td>
+                            Automatic generation of sequence diagrams, ER diagrams, event maps, and
+                            dependency graphs using Mermaid syntax.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Auto-flow detection</td>
+                        <td>
+                            JavaParser statically analyses source code to detect method call chains
+                            on injected fields and generates sequence diagrams automatically,
+                            recursively, with conditional branch detection.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hybrid JPA support</td>
+                        <td>
+                            Enriches entity documentation with JPA metadata (<code>@Entity</code>,
+                            <code>@Column</code>, <code>@Id</code>, <code>@OneToMany</code>&hellip;)
+                            without requiring JPA as a compile dependency.
+                            <code>@JDoc*</code> annotations always take priority.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Full Docusaurus output</td>
+                        <td>
+                            Generates <code>index.md</code>, <code>sidebars.js</code>, and
+                            per-controller / per-entity / per-event Markdown files ready to drop
+                            into a Docusaurus project.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Business rules</td>
+                        <td>
+                            Documents business rules grouped by severity: <code>MANDATORY</code>,
+                            <code>WARNING</code>, <code>INFO</code>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>External integrations</td>
+                        <td>
+                            Documents external services (REST, gRPC, messaging&hellip;) and
+                            generates a Mermaid dependency map.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Configuration docs</td>
+                        <td>
+                            Documents configuration properties. Secrets (<code>secret = true</code>)
+                            are masked with <code>***</code> in the output.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Configurable</td>
+                        <td>
+                            Output directory, project name, description, auto-flow depth and more
+                            via Maven compiler args (<code>-Ajdoc.*</code>).
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
             <!-- ═══════════════════════════════════════════

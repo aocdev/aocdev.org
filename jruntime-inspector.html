@@ -70,69 +70,72 @@
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="features">Key Features</div>
             <table class="feature-list" style="border: 1px solid #888888">
-                <tr>
-                    <td>Zero dependencies</td>
-                    <td>
-                        JDK only &mdash; no Spring, Micronaut, Quarkus, or any third-party library
-                        required.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Framework-agnostic</td>
-                    <td>
-                        Works with any JVM backend: plain Java, Spring Boot, Quarkus, Micronaut,
-                        Jakarta EE, etc.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Three instrumentation styles</td>
-                    <td>
-                        Manual <code>start/end</code>, try-with-resources <code>track()</code>, and
-                        functional <code>measure()</code> &mdash; pick what fits the call site.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hierarchical execution tree</td>
-                    <td>
-                        Nested calls produce an indented breakdown with percentage contribution per
-                        node.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hotspot detection</td>
-                    <td>
-                        Automatically flags nodes that exceed a configurable percentage of total run
-                        time.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Threshold filtering</td>
-                    <td>
-                        Ignore fast nodes below a configurable duration floor (ms) to keep reports
-                        clean.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tag support</td>
-                    <td>
-                        Attach arbitrary key-value metadata to any node (e.g.
-                        <code>table=users</code>, <code>operation=SELECT</code>).
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thread-safe</td>
-                    <td>
-                        Each thread owns its own independent context via <code>ThreadLocal</code>.
-                        No locking required.
-                    </td>
-                </tr>
-                <tr>
-                    <td>Extensible</td>
-                    <td>
-                        Implement <code>MetricsReporter</code> to produce JSON, HTML, or any custom
-                        output format.
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Zero dependencies</td>
+                        <td>
+                            JDK only &mdash; no Spring, Micronaut, Quarkus, or any third-party
+                            library required.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Framework-agnostic</td>
+                        <td>
+                            Works with any JVM backend: plain Java, Spring Boot, Quarkus, Micronaut,
+                            Jakarta EE, etc.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Three instrumentation styles</td>
+                        <td>
+                            Manual <code>start/end</code>, try-with-resources <code>track()</code>,
+                            and functional <code>measure()</code> &mdash; pick what fits the call
+                            site.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hierarchical execution tree</td>
+                        <td>
+                            Nested calls produce an indented breakdown with percentage contribution
+                            per node.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hotspot detection</td>
+                        <td>
+                            Automatically flags nodes that exceed a configurable percentage of total
+                            run time.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Threshold filtering</td>
+                        <td>
+                            Ignore fast nodes below a configurable duration floor (ms) to keep
+                            reports clean.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tag support</td>
+                        <td>
+                            Attach arbitrary key-value metadata to any node (e.g.
+                            <code>table=users</code>, <code>operation=SELECT</code>).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thread-safe</td>
+                        <td>
+                            Each thread owns its own independent context via
+                            <code>ThreadLocal</code>. No locking required.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Extensible</td>
+                        <td>
+                            Implement <code>MetricsReporter</code> to produce JSON, HTML, or any
+                            custom output format.
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
             <!-- ═══════════════════════════════════════════
