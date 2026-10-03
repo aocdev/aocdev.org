@@ -68,6 +68,9 @@ The choice is intentional:
 - **CSS3**: a single shared stylesheet (`style.css`), with Flexbox for the page layout (so the
   footer stays at the bottom of the viewport).
 - **No JavaScript, no build step, no dependencies.**
+- **CI**: GitHub Actions checks formatting (Prettier), HTML validity (html-validate) and broken
+  links (lychee) on every pull request. The tools run with `npx`, so the project stays
+  dependency-free.
 
 ---
 
@@ -75,13 +78,19 @@ The choice is intentional:
 
 ```
 aocdev.org/
+├── .github/workflows/ci.yml  # CI: format, HTML and link checks
 ├── index.html                # Home: About the author + project summary
 ├── jdocusaurus.html          # JDocusaurus detail page
 ├── jruntime-inspector.html   # JRuntime-Inspector detail page
 ├── style.css                 # Shared Javadoc-style stylesheet
 ├── README.md
 ├── CONTRIBUTING.md           # Contribution guidelines
-└── LICENSE.md                # Apache License 2.0
+├── LICENSE.md                # Apache License 2.0
+├── .editorconfig             # Shared editor settings
+├── .prettierrc               # Prettier formatting rules
+├── .prettierignore           # Files excluded from formatting
+├── .htmlvalidate.json        # HTML validation rules
+└── .lycheeignore             # URLs excluded from the link check
 ```
 
 Every page has the same skeleton:

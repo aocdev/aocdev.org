@@ -64,9 +64,32 @@ The site intentionally imitates **classic Javadoc** (Java 1.4–1.6 era). Please
 - **One stylesheet.** All styles live in `style.css`. Avoid inline `style` attributes.
 - **Respect the page skeleton.** Every page follows the same structure:
   `.topnav` → `.page-header` → `.content` → `.page-footer`.
-- **Formatting.** 4-space indentation, lowercase HTML tags and attributes, double quotes in attributes.
+- **Formatting.** Handled by [Prettier](https://prettier.io/) (see `.prettierrc`). Run
+  `npx prettier@3.9.9 --write .` before committing instead of formatting by hand.
 - **Content language.** The site content is written in English.
 - **Check your changes** in at least two browsers and at a mobile width before opening a PR.
+
+## Automated Checks
+
+Every pull request runs the [CI workflow](.github/workflows/ci.yml) on GitHub Actions. A PR can
+only be merged when all checks pass:
+
+| Check      | Tool                                        | What it validates                                         |
+| ---------- | ------------------------------------------- | --------------------------------------------------------- |
+| Formatting | [Prettier](https://prettier.io/)            | HTML, CSS, Markdown and YAML follow the project format    |
+| HTML       | [html-validate](https://html-validate.org/) | Valid, well-formed markup (rules in `.htmlvalidate.json`) |
+| Links      | [lychee](https://lychee.cli.rs/)            | No broken links in pages or documentation                 |
+
+You can run the first two locally before opening a PR. Only Node.js is needed; nothing is
+installed in the project:
+
+```bash
+npx prettier@3.9.9 --check .        # use --write to fix formatting
+npx html-validate@11.16.1 "*.html"
+```
+
+> Inline `style` attributes are reported as warnings: they don't fail the build, but please don't
+> add new ones.
 
 ## Branching Strategy (GitHub Flow)
 
@@ -164,6 +187,7 @@ Closes #123
 - [ ] No new JavaScript or external dependencies (or agreed in an issue)
 - [ ] Existing CSS classes reused where possible
 - [ ] Conventional Commits followed
+- [ ] CI checks pass (formatting, HTML, links)
 - [ ] Screenshots attached (visual changes)
 ```
 
