@@ -59,9 +59,10 @@ The site intentionally imitates **classic Javadoc** (Java 1.4–1.6 era). Please
 
 - **Keep it static.** Plain HTML5 and CSS3. No JavaScript unless it has been agreed in an issue first.
 - **Reuse the existing components.** Use the classes already defined in `style.css`
-  (`.section-bar`, `.project-card`, `.meta-badge`, `.feature-list`, `.annot-table`...) before
+  (`.section-bar`, `.project-card`, `.meta-badge`, `.feature-list`, `.annot-table`, `.code-block`...) before
   creating new ones.
-- **One stylesheet.** All styles live in `style.css`. Avoid inline `style` attributes.
+- **One stylesheet.** All styles live in `style.css`. Inline `style` attributes are not allowed
+  (the HTML check fails).
 - **Respect the page skeleton.** Every page follows the same structure:
   `.topnav` → `.page-header` → `.content` → `.page-footer`.
 - **Formatting.** Handled by [Prettier](https://prettier.io/) (see `.prettierrc`). Run
@@ -87,9 +88,6 @@ installed in the project:
 npx prettier@3.9.9 --check .        # use --write to fix formatting
 npx html-validate@11.16.1 "*.html"
 ```
-
-> Inline `style` attributes are reported as warnings: they don't fail the build, but please don't
-> add new ones.
 
 ## Branching Strategy (GitHub Flow)
 
