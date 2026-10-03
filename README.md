@@ -87,6 +87,7 @@ aocdev.org/
 ├── README.md
 ├── CONTRIBUTING.md           # Contribution guidelines
 ├── LICENSE.md                # Apache License 2.0
+├── NOTICE                    # Copyright and attribution notice
 ├── .editorconfig             # Shared editor settings
 ├── .prettierrc               # Prettier formatting rules
 ├── .prettierignore           # Files excluded from formatting
@@ -208,3 +209,4 @@ For contributions to the projects themselves, please go to their own repositorie
 
 This project is licensed under the [Apache License 2.0](LICENSE.md), the same license used by the
 aocdev open source projects.
+Copyright and attribution notices are in the [NOTICE](NOTICE) file.
