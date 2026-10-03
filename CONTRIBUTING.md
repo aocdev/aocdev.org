@@ -1,4 +1,4 @@
-# Contributing to aocdev-web
+# Contributing to aocdev.org
 
 Thank you for taking the time to look at the source code of [aocdev.org](https://aocdev.org)!
 
@@ -9,7 +9,7 @@ accessibility problem or a way to make the site better, your help is welcome.
 
 This project adheres to the [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
 By participating, you are expected to uphold this code. Please report unacceptable behaviour via
-[GitHub Issues](https://github.com/aocdev/aocdev-web/issues).
+[GitHub Issues](https://github.com/aocdev/aocdev.org/issues).
 
 ## What Kind of Contributions Are Welcome?
 
@@ -27,7 +27,7 @@ By participating, you are expected to uphold this code. Please report unacceptab
 
 ## Reporting Issues
 
-Before opening an issue, please check the [existing issues](https://github.com/aocdev/aocdev-web/issues)
+Before opening an issue, please check the [existing issues](https://github.com/aocdev/aocdev.org/issues)
 to avoid duplicates.
 
 When reporting a problem, include:
@@ -42,8 +42,8 @@ When reporting a problem, include:
 The site is plain static HTML and CSS. There are no dependencies and no build step.
 
 ```bash
-git clone https://github.com/aocdev/aocdev-web.git
-cd aocdev-web
+git clone https://github.com/aocdev/aocdev.org.git
+cd aocdev.org
 
 # Option 1: open index.html directly in your browser
 

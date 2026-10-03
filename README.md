@@ -1,4 +1,4 @@
-# aocdev-web
+# aocdev.org
 
 Source code of **[aocdev.org](https://aocdev.org)**, the personal website and project catalogue of
 Albert Ortells ([@aocdev](https://github.com/aocdev)).
@@ -74,7 +74,7 @@ The choice is intentional:
 ## Project Structure
 
 ```
-aocdev-web/
+aocdev.org/
 ├── index.html                # Home: About the author + project summary
 ├── jdocusaurus.html          # JDocusaurus detail page
 ├── jruntime-inspector.html   # JRuntime-Inspector detail page
