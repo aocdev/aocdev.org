@@ -40,7 +40,7 @@
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="overview">Overview</div>
             <div class="about-box">
-                <div class="project-meta" style="margin-bottom: 12px">
+                <div class="project-meta">
                     <span class="meta-badge lang">Java 21+</span>
                     <span class="meta-badge license">Apache&nbsp;2.0</span>
                     <span class="meta-badge">Annotation&nbsp;Processor&nbsp;(APT)</span>
@@ -72,7 +72,7 @@
          KEY FEATURES
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="features">Key Features</div>
-            <table class="feature-list" style="border: 1px solid #888888">
+            <table class="feature-list">
                 <tbody>
                     <tr>
                         <td>Zero runtime</td>
@@ -207,7 +207,7 @@
             </table>
 
             <!-- Flows -->
-            <div class="feature-bar" style="margin-top: 14px">Flows &amp; Sequence Diagrams</div>
+            <div class="feature-bar">Flows &amp; Sequence Diagrams</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -242,7 +242,7 @@
             </table>
 
             <!-- Data model -->
-            <div class="feature-bar" style="margin-top: 14px">Data Model</div>
+            <div class="feature-bar">Data Model</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -281,7 +281,7 @@
             </table>
 
             <!-- Events -->
-            <div class="feature-bar" style="margin-top: 14px">Events &amp; Messaging</div>
+            <div class="feature-bar">Events &amp; Messaging</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -319,9 +319,7 @@
             </table>
 
             <!-- Rules / Integrations / Config -->
-            <div class="feature-bar" style="margin-top: 14px">
-                Business Rules, Integrations &amp; Configuration
-            </div>
+            <div class="feature-bar">Business Rules, Integrations &amp; Configuration</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -368,17 +366,7 @@
             <div class="section-bar" id="installation">Installation</div>
             <div class="about-box">
                 <p>Add the dependencies to your <code>pom.xml</code>:</p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <pre class="code-block">
 &lt;dependencies&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;org.aocdev&lt;/groupId&gt;
@@ -393,20 +381,10 @@
         &lt;scope&gt;provided&lt;/scope&gt;
     &lt;/dependency&gt;
 &lt;/dependencies&gt;</pre>
-                <p style="margin-top: 12px">
+                <p>
                     Optionally configure processor options via <code>maven-compiler-plugin</code>:
                 </p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <pre class="code-block">
 &lt;build&gt;
     &lt;plugins&gt;
         &lt;plugin&gt;
@@ -423,21 +401,9 @@
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</pre>
-                <p style="margin-top: 12px">
-                    Then compile and documentation is generated automatically:
-                </p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 8px 14px;
-                        margin-top: 8px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                    "
-                >
-./mvnw clean compile</pre>
-                <p style="margin-top: 10px">
+                <p>Then compile and documentation is generated automatically:</p>
+                <pre class="code-block compact">./mvnw clean compile</pre>
+                <p class="note">
                     Markdown files are generated in <code>target/classes/docs/</code> by default.
                 </p>
             </div>
@@ -508,38 +474,28 @@
                     With <code>jdoc.fullStructure=true</code>, the following directory tree is
                     generated:
                 </p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        line-height: 1.7;
-                    "
-                >docs/
-  index.md                    <span style="color:#555555;"># Main page with summary diagrams</span>
-  sidebars.js                 <span style="color:#555555;"># Docusaurus sidebar configuration</span>
+                <pre class="code-block tree">docs/
+  index.md                    <span class="code-comment"># Main page with summary diagrams</span>
+  sidebars.js                 <span class="code-comment"># Docusaurus sidebar configuration</span>
   api/
-    index.md                  <span style="color:#555555;"># Controller and endpoint index</span>
-    user-controller.md        <span style="color:#555555;"># Per-controller documentation</span>
+    index.md                  <span class="code-comment"># Controller and endpoint index</span>
+    user-controller.md        <span class="code-comment"># Per-controller documentation</span>
   flows/
-    index.md                  <span style="color:#555555;"># Flow index</span>
-    user-registration.md      <span style="color:#555555;"># Per-flow sequence diagram</span>
+    index.md                  <span class="code-comment"># Flow index</span>
+    user-registration.md      <span class="code-comment"># Per-flow sequence diagram</span>
   data-model/
-    index.md                  <span style="color:#555555;"># Global ER diagram + entity table</span>
-    user-entity.md            <span style="color:#555555;"># Per-entity fields and relationships</span>
+    index.md                  <span class="code-comment"># Global ER diagram + entity table</span>
+    user-entity.md            <span class="code-comment"># Per-entity fields and relationships</span>
   events/
-    index.md                  <span style="color:#555555;"># Event map + summary table</span>
-    user-created-event.md     <span style="color:#555555;"># Per-event producers/consumers</span>
+    index.md                  <span class="code-comment"># Event map + summary table</span>
+    user-created-event.md     <span class="code-comment"># Per-event producers/consumers</span>
   business-rules/
-    index.md                  <span style="color:#555555;"># Rules grouped by severity</span>
+    index.md                  <span class="code-comment"># Rules grouped by severity</span>
   integrations/
-    index.md                  <span style="color:#555555;"># Dependency map + service table</span>
+    index.md                  <span class="code-comment"># Dependency map + service table</span>
   config/
-    index.md                  <span style="color:#555555;"># Configuration properties table</span></pre>
-                <p style="margin-top: 12px">
+    index.md                  <span class="code-comment"># Configuration properties table</span></pre>
+                <p>
                     To integrate with Docusaurus, install the Mermaid plugin (<code
                         >npm install @docusaurus/theme-mermaid</code
                     >) and enable it in <code>docusaurus.config.js</code>. See the
@@ -550,13 +506,7 @@
 
             <hr class="javadoc" />
 
-            <div
-                style="
-                    font-family: &quot;DejaVu Sans&quot;, Arial, Helvetica, sans-serif;
-                    font-size: 12px;
-                    color: #555555;
-                "
-            >
+            <div class="repo-link">
                 <strong>Repository:</strong>
                 <a href="https://github.com/aocdev/JDocusaurus" target="_blank"
                     >github.com/aocdev/JDocusaurus</a

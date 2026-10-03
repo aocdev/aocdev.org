@@ -38,7 +38,7 @@
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="overview">Overview</div>
             <div class="about-box">
-                <div class="project-meta" style="margin-bottom: 12px">
+                <div class="project-meta">
                     <span class="meta-badge lang">Java 21+</span>
                     <span class="meta-badge license">Apache&nbsp;2.0</span>
                     <span class="meta-badge">Zero&nbsp;Dependencies</span>
@@ -69,7 +69,7 @@
          KEY FEATURES
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="features">Key Features</div>
-            <table class="feature-list" style="border: 1px solid #888888">
+            <table class="feature-list">
                 <tbody>
                     <tr>
                         <td>Zero dependencies</td>
@@ -178,7 +178,7 @@
             </table>
 
             <!-- Measurement -->
-            <div class="feature-bar" style="margin-top: 14px">Measurement</div>
+            <div class="feature-bar">Measurement</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -251,7 +251,7 @@
             </table>
 
             <!-- MetricReport -->
-            <div class="feature-bar" style="margin-top: 14px">MetricReport</div>
+            <div class="feature-bar">MetricReport</div>
             <table class="annot-table">
                 <thead>
                     <tr>
@@ -282,17 +282,7 @@
             <div class="section-bar">Quick Start Example</div>
             <div class="about-box">
                 <p>Instrument your code:</p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <pre class="code-block">
 Metrics.startRun("import-job");
 
 try (MetricScope ignored = Metrics.track("processUsers")) {
@@ -303,18 +293,8 @@ try (MetricScope ignored = Metrics.track("processUsers")) {
 
 Metrics.endRun();
 Metrics.report().writeToFile("report.md");</pre>
-                <p style="margin-top: 12px">Generated <code>report.md</code>:</p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <p>Generated <code>report.md</code>:</p>
+                <pre class="code-block">
 # Execution Report — import-job
 
 ## Summary
@@ -335,18 +315,8 @@ Metrics.report().writeToFile("report.md");</pre>
          CONFIGURATION
     ═══════════════════════════════════════════ -->
             <div class="section-bar" id="configuration">Configuration</div>
-            <div class="about-box" style="padding-bottom: 0">
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-bottom: 14px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+            <div class="about-box code-box">
+                <pre class="code-block">
 MetricsConfig config = MetricsConfig.builder()
         .enabled(true)                   // false = all methods become no-ops
         .thresholdMs(10)                 // skip nodes faster than 10 ms
@@ -410,17 +380,7 @@ MetricsConfig config = MetricsConfig.builder()
                     Implement <code>MetricsReporter</code> to produce any output format (JSON, HTML,
                     CSV, &hellip;):
                 </p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <pre class="code-block">
 public class JsonReporter implements MetricsReporter {
 
     @Override
@@ -428,7 +388,7 @@ public class JsonReporter implements MetricsReporter {
         // traverse root.getChildren() recursively and build JSON
     }
 }</pre>
-                <p style="margin-top: 10px">
+                <p class="note">
                     Pass your reporter to <code>MetricReport</code> directly, or contribute it back
                     via a pull request.
                 </p>
@@ -440,48 +400,23 @@ public class JsonReporter implements MetricsReporter {
             <div class="section-bar" id="installation">Installation</div>
             <div class="about-box">
                 <p>Add <code>metrics-core</code> to your <code>pom.xml</code>:</p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 10px 14px;
-                        margin-top: 10px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                        overflow-x: auto;
-                    "
-                >
+                <pre class="code-block">
 &lt;dependency&gt;
     &lt;groupId&gt;org.aocdev&lt;/groupId&gt;
     &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
     &lt;version&gt;1.0.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
-                <p style="margin-top: 12px">Build and run the demo:</p>
-                <pre
-                    style="
-                        background: #f7f7f7;
-                        border: 1px solid #cccccc;
-                        padding: 8px 14px;
-                        margin-top: 8px;
-                        font-family: &quot;Courier New&quot;, Courier, monospace;
-                        font-size: 12px;
-                    "
-                >
+                <p>Build and run the demo:</p>
+                <pre class="code-block compact">
 ./mvnw install &amp;&amp; ./mvnw -pl metrics-example exec:java</pre>
-                <p style="margin-top: 10px">
+                <p class="note">
                     The demo generates <code>report.md</code> in the working directory.
                 </p>
             </div>
 
             <hr class="javadoc" />
 
-            <div
-                style="
-                    font-family: &quot;DejaVu Sans&quot;, Arial, Helvetica, sans-serif;
-                    font-size: 12px;
-                    color: #555555;
-                "
-            >
+            <div class="repo-link">
                 <strong>Repository:</strong>
                 <a href="https://github.com/aocdev/jruntime-inspector" target="_blank"
                     >github.com/aocdev/jruntime-inspector</a
