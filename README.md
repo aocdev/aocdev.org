@@ -79,6 +79,7 @@ The choice is intentional:
 ```
 aocdev.org/
 ├── .github/workflows/ci.yml  # CI: format, HTML and link checks
+├── .github/dependabot.yml    # Weekly updates for GitHub Actions
 ├── index.html                # Home: About the author + project summary
 ├── jdocusaurus.html          # JDocusaurus detail page
 ├── jruntime-inspector.html   # JRuntime-Inspector detail page
