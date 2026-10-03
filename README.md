@@ -38,9 +38,9 @@ The website has three goals:
 
 ## Featured Projects
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| **JDocusaurus** | Java annotation processor (APT) that generates deep microservice documentation in Docusaurus format at compile time. Zero runtime overhead. | [aocdev/JDocusaurus](https://github.com/aocdev/JDocusaurus) |
+| Project                | Description                                                                                                                                             | Repository                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **JDocusaurus**        | Java annotation processor (APT) that generates deep microservice documentation in Docusaurus format at compile time. Zero runtime overhead.             | [aocdev/JDocusaurus](https://github.com/aocdev/JDocusaurus)               |
 | **JRuntime-Inspector** | Lightweight, framework-agnostic runtime profiling library for the JVM. It produces a hierarchical Markdown report that shows where execution time goes. | [aocdev/jruntime-inspector](https://github.com/aocdev/jruntime-inspector) |
 
 Each project has its own detail page on the site (`jdocusaurus.html`, `jruntime-inspector.html`).
@@ -153,10 +153,10 @@ Highlights, based on its Architecture Decision Records (ADRs):
 - **Observability:** logs (ELK + Loki), metrics (Prometheus), dashboards (Grafana) and tracing
   (OpenTelemetry).
 - **Dogfooding:** it is the real-world testbed for the other aocdev libraries:
-  - **JDocusaurus** generates its documentation from annotations on controllers, entities, events
-    and use cases.
-  - **JRuntime-Inspector** profiles key use cases (registration, login, token refresh, plan
-    changes, payment webhooks).
+    - **JDocusaurus** generates its documentation from annotations on controllers, entities, events
+      and use cases.
+    - **JRuntime-Inspector** profiles key use cases (registration, login, token refresh, plan
+      changes, payment webhooks).
 
 Tasks:
 

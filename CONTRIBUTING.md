@@ -13,13 +13,13 @@ By participating, you are expected to uphold this code. Please report unacceptab
 
 ## What Kind of Contributions Are Welcome?
 
-| Welcome | Please discuss first |
-|---------|----------------------|
-| Typos, grammar and wording fixes | Redesigns or changes to the visual style |
-| Broken or outdated links | New sections or pages |
+| Welcome                                                     | Please discuss first                         |
+| ----------------------------------------------------------- | -------------------------------------------- |
+| Typos, grammar and wording fixes                            | Redesigns or changes to the visual style     |
+| Broken or outdated links                                    | New sections or pages                        |
 | Accessibility improvements (contrast, semantics, alt texts) | Adding JavaScript, frameworks or build tools |
-| Responsive / cross-browser layout fixes | Adding third-party scripts or services |
-| HTML validation and CSS cleanups | |
+| Responsive / cross-browser layout fixes                     | Adding third-party scripts or services       |
+| HTML validation and CSS cleanups                            |                                              |
 
 > **Contributions to the projects themselves** (JDocusaurus, JRuntime-Inspector, AuthFromZero...)
 > belong in their own repositories on [github.com/aocdev](https://github.com/aocdev), not here.
@@ -107,16 +107,16 @@ We follow [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v
 
 ### Types
 
-| Type | Description |
-|------|-------------|
-| `feat` | New page, section or visible feature |
-| `fix` | Bug fix (broken link, layout issue, wrong content) |
-| `docs` | Repository documentation only (README, CONTRIBUTING, LICENSE) |
-| `style` | Visual changes in CSS that don't change content or structure |
-| `refactor` | Markup / CSS restructuring without visible changes |
-| `perf` | Loading or rendering performance improvements |
-| `chore` | Maintenance (`.gitignore`, config files...) |
-| `revert` | Reverts a previous commit |
+| Type       | Description                                                   |
+| ---------- | ------------------------------------------------------------- |
+| `feat`     | New page, section or visible feature                          |
+| `fix`      | Bug fix (broken link, layout issue, wrong content)            |
+| `docs`     | Repository documentation only (README, CONTRIBUTING, LICENSE) |
+| `style`    | Visual changes in CSS that don't change content or structure  |
+| `refactor` | Markup / CSS restructuring without visible changes            |
+| `perf`     | Loading or rendering performance improvements                 |
+| `chore`    | Maintenance (`.gitignore`, config files...)                   |
+| `revert`   | Reverts a previous commit                                     |
 
 ### Scopes (optional)
 
@@ -150,12 +150,15 @@ docs: add analytics item to backlog
 
 ```markdown
 ## Summary
+
 Brief description of the change.
 
 ## Related Issue
+
 Closes #123
 
 ## Checklist
+
 - [ ] Tested in at least two browsers
 - [ ] Tested at mobile width
 - [ ] No new JavaScript or external dependencies (or agreed in an issue)
